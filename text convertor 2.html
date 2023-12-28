@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Letter Conversion</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #37474f; /* Dark blue-grey background */
+      color: #ffffff;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+    }
+
+    #inputText, #convertedText, #convertedBackText {
+      padding: 10px;
+      margin-bottom: 10px;
+      width: 300px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      background-color: #263238; /* Darker shade of blue-grey */
+      color: #ffffff;
+    }
+
+    #convertBtn, #convertBackBtn {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      background-color: #1e88e5; /* Dark blue button color */
+      color: #ffffff;
+      cursor: pointer;
+    }
+
+    /* On hover, change button color slightly */
+    #convertBtn:hover, #convertBackBtn:hover {
+      background-color: #1565c0; /* Darker shade on hover */
+    }
+  </style>
+</head>
+<body>
+  <h1>Letter Conversion</h1>
+  <textarea id="inputText" placeholder="Enter text to convert"></textarea>
+  <button id="convertBtn" onclick="convertText()">Convert to Special Letters</button>
+  <textarea id="convertedText" placeholder="Converted text" readonly></textarea>
+  <button id="convertBackBtn" onclick="convertBack()">Convert Back</button>
+  <textarea id="convertedBackText" placeholder="Converted back" readonly></textarea>
+
+  <script>
+  var conversionTable = {
+        "A": "RRVO ",
+    "a": "RRVO ",
+    "B": "VYRY ",
+    "b": "VYRY ",
+    "C": "UYYU ",
+    "c": "UYYU ",
+    "D": "ROUY ",
+    "d": "ROUY ",
+    "E": "YORU ",
+    "e": "YORU ",
+    "F": "OOUU ",
+    "f": "OOUU ",
+    "G": "ORYR ",
+    "g": "ORYR ",
+    "H": "YURU ",
+    "h": "YURU ",
+    "I": "YUYU ",
+    "i": "YUYU ",
+    "J": "OOYY ",
+    "j": "OOYY ",
+    "K": "URRY ",
+    "k": "URRY ",
+    "L": "ROYU ",
+    "l": "ROYU ",
+    "M": "ROYR ",
+    "m": "ROYR ",
+    "N": "UUOY ",
+    "n": "UUOY ",
+    "O": "UUUU ",
+    "o": "UUUU ",
+    "P": "OOUY ",
+    "p": "OOUY ",
+    "Q": "YROY ",
+    "q": "YROY ",
+    "R": "OOYU ",
+    "r": "OOYU ",
+    "S": "ROUY ",
+    "s": "ROUY ",
+    "T": "UURU ",
+    "t": "UURU ",
+    "U": "YUUU ",
+    "u": "YUUU ",
+    "V": "OOYY ",
+    "v": "OOYY ",
+    "W": "UORY ",
+    "w": "UORY ",
+    "X": "RRYY ",
+    "x": "RRYY ",
+    "Y": "OOYO ",
+    "y": "OOYO ",
+    "Z": "UYOU ",
+    "z": "UYOU ",
+    };
+
+    function convertText() {
+      var userInput = document.getElementById("inputText").value;
+      var convertedText = "";
+      var convertedBackText = "";
+
+      for (var i = 0; i < userInput.length; i++) {
+        var char = userInput.charAt(i);
+        if (char in conversionTable) {
+          convertedText += conversionTable[char];
+        } else {
+          convertedText += char;
+        }
+      }
+
+      var reversedTable = {};
+      for (var key in conversionTable) {
+        reversedTable[conversionTable[key].trim()] = key + " ";
+      }
+
+      var words = convertedText.split(' ');
+      for (var i = 0; i < words.length; i++) {
+        var word = words[i];
+        if (word in reversedTable) {
+          convertedBackText += reversedTable[word];
+        } else {
+          convertedBackText += word;
+        }
+      }
+
+      document.getElementById("convertedText").value = convertedText;
+      document.getElementById("convertedBackText").value = convertedBackText;
+    }
+
+    function convertBack() {
+      // Call the same conversion logic as convertText() for the opposite conversion
+      convertText();
+    }
+  </script>
+</body>
+</html>
